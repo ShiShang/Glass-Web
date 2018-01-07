@@ -216,4 +216,17 @@ public class QuestionDao {
 		conn.close();
 		return list;	
 	}
+	
+	public String get_listnum(String sql) throws SQLException {
+		ResultSet rs=conn.executeQuery(sql);
+		String result="";
+		if(rs.next())
+		{
+			result=rs.getInt("q_id")+"";
+		}else{
+			result="没有获取到问题列表！";
+		}
+		conn.close();
+		return result;	
+	}
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>登录 - 知乎 </title>
+	<title>Cicle-登录  </title>
 	<meta author="George.Shi">
 	<link rel="stylesheet" type="text/css" href="CSS/register-login.css">
 
@@ -29,14 +29,15 @@ function login()
 function deal_login()
 {
 	var msg=this.req.responseText;
-	alert(msg);
-	if(msg.indexOf("成功"))
+	if (msg.indexOf("成功")>=0)
 		{
+		    alert(msg);
 		    window.location.href="Home.jsp";
 		}
 	else
 		{
-		    return;
+	    	alert(msg);
+		    window.location.href="login.jsp";
 		}
 }
 	
@@ -46,7 +47,7 @@ function deal_login()
 <div id="box"></div>
 <div class="cent-box register-box">
 	<div class="cent-box-header">
-		<h1 class="main-title hide">扯犊子</h1>
+		<h1 class="main-title hide">Cicle</h1>
 		<h2 class="sub-title">生活热爱分享 </h2>
 	</div>
 
@@ -70,11 +71,11 @@ function deal_login()
                      </tr>
                      
                      <tr>
-                           <td width="93" height="40" align="right">用户名：</td>
+                           <td width="93" height="40" align="right">*用户名：</td>
                            <td height="40" align="left"><input style="width:200px" name="user" type="text">
                      </tr>
 			         <tr>
-                           <td height="40" align="right">密码：</td>
+                           <td height="40" align="right">*密码：</td>
                            <td height="40" align="left"><input style="width:200px" name="pwd" type="password">
                      </tr>
 		             <tr>
@@ -92,8 +93,8 @@ function deal_login()
 </div>
 
 <div class="footer">
-	<p>知乎 </p>
-	<p>Designed By George  @ 2017</p>
+	<p>Cicle </p>
+	<p>Designed By George  @ 2018</p>
 </div>
 
 <script src='JS/particles.js' type="text/javascript"></script>

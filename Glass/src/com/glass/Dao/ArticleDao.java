@@ -204,4 +204,17 @@ public class ArticleDao {
 		return list;	
 	}
 
+	public String get_listnum(String sql) throws SQLException {
+		ResultSet rs=conn.executeQuery(sql);
+		String result="";
+		if(rs.next())
+		{
+			result=rs.getInt("a_id")+"";
+		}else{
+			result="没有获取到文章！";
+		}
+		conn.close();
+		return result;	
+	}
+
 }

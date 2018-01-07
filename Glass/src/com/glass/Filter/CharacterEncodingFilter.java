@@ -9,10 +9,15 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.log4j.Logger;
+
+import com.glass.Servlet.UserServlet;
+
 public class CharacterEncodingFilter implements Filter{
 	
 	protected String encoding=null;
 	protected FilterConfig filterConfig=null;
+	public static Logger logger1 = Logger.getLogger(UserServlet.class);
 	
 	public void init(FilterConfig filterConfig)
 	{
@@ -23,9 +28,10 @@ public class CharacterEncodingFilter implements Filter{
 	public void doFilter(ServletRequest request,ServletResponse response,FilterChain chain) throws IOException, ServletException
 	{
 		if(encoding!=null)
-		{
+		{  
 			request.setCharacterEncoding(encoding);
 			response.setCharacterEncoding(encoding);
+			
 		}
 		chain.doFilter(request, response);
 	}

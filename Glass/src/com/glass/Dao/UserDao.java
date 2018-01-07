@@ -74,7 +74,7 @@ public class UserDao {
 		String[] Beijing_zone={"东城","西城","海淀","朝阳","丰台","石景山","顺义"};
 		map.put("上海",Shanghai_zone);
 		map.put("北京",Beijing_zone);
-		System.out.println(map.entrySet().toString());
+		//System.out.println(map.entrySet().toString());
 		return map;
 	}
 	 public String[] getquestion()

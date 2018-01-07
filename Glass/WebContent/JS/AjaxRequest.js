@@ -1,7 +1,8 @@
 
 var net = new Object();              //定义一个全局变量net  
 //编写构造函数  
-net.AjaxRequest = function(url,onload,onerror,method,params){  
+net.AjaxRequest = function(url,onload,onerror,method,params,async){  
+	if(!async){async=true;}
 	this.req = null;  
     this.onload = onload;  
     this.onerror = (onerror)?onerror:this.defaultError;  
@@ -9,7 +10,7 @@ net.AjaxRequest = function(url,onload,onerror,method,params){
 }
 
 //编写用于初始化XMLHttpRequest对象并指定处理函数，最后发送HTTP请求的方法  
-net.AjaxRequest.prototype.loadDate=function(url,method,params){
+net.AjaxRequest.prototype.loadDate=function(url,method,params,async){
 	  if (!method){
 	    method="GET";	//璁剧疆榛樿鐨勮姹傛柟寮忎负GET
 	  }
@@ -24,7 +25,7 @@ net.AjaxRequest.prototype.loadDate=function(url,method,params){
             this.req.onreadystatechange = function(){  
                 net.AjaxRequest.onReadyState.call(loader);  
             }  
-            this.req.open(method,url,true);            //建立对服务器的调用  
+            this.req.open(method,url,async);            //建立对服务器的调用  
             if(method=="POST"){                        //如果提交方式为POST  
                 this.req.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  //设置请求头  
             }  

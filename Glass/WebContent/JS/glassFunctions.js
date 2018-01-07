@@ -24,7 +24,7 @@ function checklength(str,length)
 function checkpwd(str)
 {
 	var password=str;
-	var Expression=/^[A-Za-z]{1}([A-Za-z0-9]$/;
+	var Expression=/^([A-Za-z0-9]$/;
 	var objExp=new RegExp(Expression);
 	if(objExp.test(password)==true)
 		{
@@ -58,9 +58,14 @@ function logout()
 	location.reload();
 }
 
-
-
 function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+function listend(name)
 {
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);

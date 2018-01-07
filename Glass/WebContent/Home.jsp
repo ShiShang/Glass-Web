@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="com.glass.Model.Article" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.glass.Tools.Pagination" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -11,7 +13,7 @@
 <meta name="keywords" content="keywords"/> 
 <meta name="author" content="author"/> 
 <link rel="stylesheet" type="text/css" href="CSS/default.css" media="screen"/>
-<title>知乎-首页</title>
+<title>Cicle-首页</title>
 
 
 <script language="javascript"  src="JS/AjaxRequest.js"></script>	
@@ -29,7 +31,6 @@ function load()
 	    document.getElementById('log').style.display= "block";
 	    document.getElementById('nolog').style.display= "none";
     }
-	var loader=new net.AjaxRequest("ArticleServlet?action=get_all&nocache="+new Date().getTime(),onload,onerror,"GET","");
 }
 function onload(){
 	return;
@@ -47,7 +48,7 @@ function onerror()
 	<div class="header">
 		
 		<div class="title">
-			<h1>拉拉-发现更大的自己</h1>
+			<h1>Cicle-发现更大的自己</h1>
 		</div>
 
 		<div class="navigation">
@@ -60,12 +61,12 @@ function onerror()
 		</div>
 
 	</div>
+	
 
 	<div class="main">
 		<div class="content">
-		<% ArrayList<Article> list=(ArrayList<Article>)request.getSession().getAttribute("list");
-		   //out.print(list);
-		   //out.print("size:"+list.size());
+		<c:import url="/Article_listServlet"/>
+		<% ArrayList<Article> list=(ArrayList<Article>)request.getAttribute("list");
 		   if(list==null||list.size()<1) { out.print("没有数据？刷新一下试试..."); }
 		   else {
 			   for(Article article:list) { %>
@@ -124,8 +125,17 @@ function onerror()
 			</ul>
 
 		</div>
-	
+	    <br><br><br>
 		<div class="clearer">&nbsp;</div>
+	 	<% Pagination pagination=new Pagination(); 
+		   String currentPage=(String)request.getAttribute("currentPage");
+		   String listnum=(String)request.getAttribute("listnum");
+		   String strHtml="";
+		   if(listnum==null){strHtml="";}else{
+		   strHtml=pagination.printCtrl(currentPage,"Home.jsp?", listnum);}
+		%>
+		<p id="flag"><%= strHtml %></p>
+		 
 
 	</div>
 

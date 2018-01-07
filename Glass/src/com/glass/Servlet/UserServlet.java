@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import com.glass.Dao.*;
 import com.glass.Model.*;
-
+import org.apache.log4j.Logger;
 /**
  * Servlet implementation class UserServlet
  */
@@ -33,11 +33,13 @@ public class UserServlet extends HttpServlet {
      */
 	private UserDao dao=null;
 	private User user=null;
+	//日志打印
+	public static Logger logger1 = Logger.getLogger(UserServlet.class);
 	
     public UserServlet() {
         super();
         dao=new UserDao();
-        user=new User();
+        user=new User();  
     }
 
 	/**
@@ -141,13 +143,19 @@ public class UserServlet extends HttpServlet {
 	
 	public void getCity(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		HashMap<String,String[]> map=dao.ProvinceCity();
+		request.setCharacterEncoding("utf-8");
+		logger1.info("request:     "+request);
+		HashMap<String,String[]> map=null;
+		map=dao.ProvinceCity();
+		logger1.info(map.toString());
 	    String result="";
 	    String selprovince=request.getParameter("selprovince");
 	    String[] city=(String[]) map.get(selprovince);
+	    logger1.info("province:"+selprovince+"city"+city);
 	    for(int i=0;i<city.length;i++)
 	    {
 	    	result=result+city[i]+",";
+	    	//System.out.println(result);
 	    }
 	    result=result.substring(0,result.length()-1);
 	    PrintWriter out=response.getWriter();
@@ -158,7 +166,8 @@ public class UserServlet extends HttpServlet {
 	}
 	public void getQuestion (HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		String[] question=dao.getquestion();
+		String[] question=null;
+	    question=dao.getquestion();
 		String result="";
 		for(int i=0;i<question.length;i++){
 			result=result+question[i]+",";

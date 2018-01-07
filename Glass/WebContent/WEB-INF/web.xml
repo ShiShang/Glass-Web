@@ -9,16 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>UserServlet</display-name>
-    <servlet-name>UserServlet</servlet-name>
-    <servlet-class>com.glass.Servlet.UserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/UserServlet</url-pattern>
-  </servlet-mapping>
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>com.glass.Filter.CharacterEncodingFilter</filter-class>
@@ -33,6 +23,16 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserServlet</display-name>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/UserServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>ArticleServlet</display-name>
@@ -76,5 +76,35 @@
   <servlet-mapping>
     <servlet-name>PresentServlet</servlet-name>
     <url-pattern>/PresentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Article_listServlet</display-name>
+    <servlet-name>Article_listServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.Article_listServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Article_listServlet</servlet-name>
+    <url-pattern>/Article_listServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Question_listServlet</display-name>
+    <servlet-name>Question_listServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.Question_listServlet</servlet-class>
+  </servlet>5
+  <servlet-mapping>
+    <servlet-name>Question_listServlet</servlet-name>
+    <url-pattern>/Question_listServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>question</display-name>
+    <servlet-name>question</servlet-name>
+    <servlet-class>com.glass.Servlet.question</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>question</servlet-name>
+    <url-pattern>/question</url-pattern>
   </servlet-mapping>
 </web-app>

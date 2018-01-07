@@ -12,7 +12,7 @@
 <meta name="keywords" content="keywords"/> 
 <meta name="author" content="author"/> 
 <link rel="stylesheet" type="text/css" href="CSS/default.css" media="screen"/>
-<title>知乎-收藏</title>
+<title>Cicle-收藏</title>
 
 <script language="javascript"  src="JS/AjaxRequest.js"></script>	
 <script language="javascript"  src="JS/glassFunctions.js"></script>	
@@ -50,7 +50,7 @@ function onerror()
 	<div class="header">
 		
 		<div class="title">
-			<h1>拉拉-发现更大的自己</h1>
+			<h1>Cicle-发现更大的自己</h1>
 		</div>
 
 		<div class="navigation">

@@ -2,20 +2,16 @@ package com.glass.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.glass.Dao.*;
 import com.glass.Model.Article;
 /**
@@ -37,8 +33,10 @@ public class ArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        
 		doPost(request,response);
+		
+	
 	}
 
 	/**
@@ -52,15 +50,6 @@ public class ArticleServlet extends HttpServlet {
 	    	try {
 				this.save(request,response);
 			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-	    }
-	    else if("get_all".equals(action))
-	    {
-	    	try {
-				this.get_article(request,response);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
@@ -95,7 +84,7 @@ public class ArticleServlet extends HttpServlet {
 			}
 	    }
 	}
-    
+
 	private void get_comment(HttpServletRequest request,HttpServletResponse response) throws SQLException, JSONException, IOException {
 		String article_id=request.getParameter("article_id");
 		String sql="select * from tb_comment where article_id="+article_id+";";
@@ -163,18 +152,6 @@ public class ArticleServlet extends HttpServlet {
 		out.flush();
 		out.close();
 		
-	}
-
-	private void get_article(HttpServletRequest request,HttpServletResponse response) throws SQLException {
-		String sql="select * from tb_article order by start_time DESC limit 15";
-		try{
-			if(list != null){
-			list.clear();}
-	      	list=dao.get_article(sql);
-			request.getSession().setAttribute("list", list);
-			//System.out.println("size"+list.size());
-			request.getRequestDispatcher("Home.jsp").forward(request,response); 
-		}catch(Exception e){e.printStackTrace();}
 	}
 
 	public void save(HttpServletRequest request,HttpServletResponse response) throws JSONException, ServletException, IOException

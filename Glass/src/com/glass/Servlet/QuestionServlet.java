@@ -55,15 +55,6 @@ public class QuestionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 	    }
-	    else if("get_all".equals(action))
-	    {
-	    	try {
-				this.get_question(request,response);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
 	    else if("getQuestion".equals(action))
 	    {
 	    	try {
@@ -93,9 +84,7 @@ public class QuestionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 	    }
-	    
 	}
-    
 	private void getAnswer(HttpServletRequest request,HttpServletResponse response) throws IOException, JSONException, SQLException
 	{
 		String question_id=request.getParameter("question_id");
@@ -167,18 +156,6 @@ public class QuestionServlet extends HttpServlet {
 		out.flush();
 		out.close();
 		
-	}
-
-	private void get_question(HttpServletRequest request,HttpServletResponse response) throws SQLException {
-		String sql="select * from tb_question order by start_time DESC limit 15";
-		try{
-			if(list != null){
-			list.clear();}
-	      	list=dao.get_question(sql);
-			request.getSession().setAttribute("list1", list);
-			//System.out.println("size"+list.size());
-			request.getRequestDispatcher("Question.jsp").forward(request,response); 
-		}catch(Exception e){e.printStackTrace();}
 	}
 
 	public void save(HttpServletRequest request,HttpServletResponse response) throws JSONException, ServletException, IOException

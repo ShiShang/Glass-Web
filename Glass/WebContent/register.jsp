@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>注册 - 知乎 </title>
+	<title>Cicle-注册 </title>
 	<meta author="George.Shi">
 	<link rel="stylesheet" type="text/css" href="CSS/register-login.css">
 
@@ -13,20 +13,27 @@
 <script language="javascript"  src="JS/glassFunctions.js"></script>	
 
 <script type="text/javascript" language="javascript">
+function flag()
+{
+	document.getElementById("checkinfo").innerHTML=" ";
+}
 function checkUser(str)
 {
 	if(str=="")
 		{
-		  //document.getElementById("div_user").innerHTML="请输入用户名！";
-		  //document.getElementById("tr_user").style.display="block";
-		  alert("请输入用户名哦！");
+		  document.getElementById("checkinfo").innerHTML="用户名不能为空！";
+		  document.getElementById("checkinfo").style.display="block";
+		  form.user.focus();
 		}
-	else if(! checklength(str,5))
+	else if(! checklength(str,6))
 		{
-		  alert("用户名长度不够哦！");
+		  document.getElementById("checkinfo").innerHTML="用户名长度要大于6位！";
+		  document.getElementById("checkinfo").style.display="block";
+		  form.user.focus();
 		}
 	else
 		{
+		document.getElementById("checkinfo").innerHTML="";
 		var loader=new net.AjaxRequest("UserServlet?action=checkUser&username="+str+"&nocache="+new Date().getTime(),deal,onerror,"GET","");
 		}
 }
@@ -48,17 +55,20 @@ function deal()
 
 function onerror(){		//错误处理函数
 	alert("出错了");
+	return;
 }
 
 function checkPwd(str)
 {
-     if(str.length<6)
+     if(str.length<6 )
 		 {
-		 alert("用户密码一定要大于6位哦！");return false;
+		  document.getElementById("checkinfo").innerHTML="用户密码应该以字母开头并大于6位！";
+		  document.getElementById("checkinfo").style.display="block";
+		  form.pwd.focus();
 		 }
-     else if (!checkpwd(str))
+     else
     	 {
-    	 alert("用户密码应该以字母开头并大于6位！");return false;
+    	 document.getElementById("checkinfo").innerHTML="";
     	 }
 }
 
@@ -66,13 +76,19 @@ function checkRepwd(str)
 {
 	if(str=="")
 	 {
-	 alert("请输入确认密码哦！");
-	 form.repwd.focus;
-	 return false;
+	  document.getElementById("checkinfo").innerHTML="请输入确认密码哦！";
+	  document.getElementById("checkinfo").style.display="block";
+	  form.repwd.focus();
 	 }
 	else if(form.pwd.value!=str)
 	{
-	 alert("二次输入的密码需要一致哦！");
+	  document.getElementById("checkinfo").innerHTML="二次输入的密码需要一致哦！";
+	  document.getElementById("checkinfo").style.display="block";
+	  form.repwd.focus();
+	}
+	else
+	{
+		document.getElementById("checkinfo").innerHTML="";
 	}
 	
 }
@@ -81,13 +97,20 @@ function checkEmail(str)
 {
 	if(! checkeEmail(str))
 		{
-		alert("邮箱地址的格式不正确！");form.email.focus;return;
+
+		  document.getElementById("checkinfo").innerHTML="邮箱地址的格式不正确！";
+		  document.getElementById("checkinfo").style.display="block";
+		  form.email.focus();
+		}
+	else
+		{
+		document.getElementById("checkinfo").innerHTML="";
 		}
 }
 //var loader=new net.AjaxRequest("UserServlet?action=checkUser&username="+str+"&nocache="+new Date().getTime(),deal,onerror,"GET","");
 function getProvince()
 { 
-	var loader=new net.AjaxRequest("UserServlet?action=getProvince&nocache"+new Date().getTime(),deal_province,onerror,"GET","");
+	var loader=new net.AjaxRequest("UserServlet?action=getProvince&nocache="+new Date().getTime(),deal_province,onerror,"GET","");
 }
 
 function deal_province()
@@ -105,12 +128,13 @@ function getCity(selprovince)
 {
 	var sel = document.getElementById("province");
 	var str=sel.value;
-	if(!str){alert("请选择省份哦！");return;}
-	var loader=new net.AjaxRequest("UserServlet?action=getCity&selprovince="+str+"&nocache"+new Date().getTime(),deal_city,onerror,"GET","");
+	if(!str){return;}
+	var loader=new net.AjaxRequest("UserServlet?action=getCity&selprovince="+str+"&nocache="+new Date().getTime(),deal_city,onerror,"GET","");
 }
 
 function deal_city(str)
 {
+	var city="";
 	city=this.req.responseText.split(",");
 	var sel = document.getElementById("city");
 	sel.innerHTML = ""
@@ -121,11 +145,12 @@ function deal_city(str)
 }
 function getQuestions()
 {
-	var loader=new net.AjaxRequest("UserServlet?action=getQuestion&nocache"+new Date().getTime(),deal_question,onerror,"GET","");
+	var loader=new net.AjaxRequest("UserServlet?action=getQuestion&nocache="+new Date().getTime(),deal_question,onerror,"GET","");
 }
 function deal_question()
 {
-	var question=this.req.responseText.split(",");
+	document.getElementById("question").innerHTML = "";
+	question=this.req.responseText.split(",");
 	var sel=document.getElementById("question");
 	sel.innnerHTML="";
 	for(var i=0;i<question.length;i++)
@@ -135,24 +160,46 @@ function deal_question()
 }
 function checkQuestion(str)
 {
-	if(str==""){alert("请输入密码提示问题答案！");return;}
+	if(str==""){
+		  document.getElementById("checkinfo").innerHTML="请输入密码提示问题答案！";
+		  document.getElementById("checkinfo").style.display="block";
+		  form.answer.focus();
+	}else{
+		document.getElementById("checkinfo").innerHTML="";
+	}
 }
 
 function save()
 {
-    var params="username="+form.user.value+"&password="+form.pwd.value+"&email="+form.email.value+"&address="+form.province.value+"-"+form.city.value+"&question="+form.question.value+"&answer="+form.answer.value;
-    var loader=new net.AjaxRequest("UserServlet?action=save&nocache="+new Date().getTime(),deal_save,onerror,"POST",params);
+	var user=document.getElementById("user").value;
+	var pwd=document.getElementById("pwd").value;
+	var repwd=document.getElementById("repwd").value;
+	var email=document.getElementById("email").value;
+	var answer=document.getElementById("answer").value;
+	if(user==""||email==""||pwd==""||repwd==""||answer==""){alert("你有信息未完善！");return;}
+	else{
+        var params="username="+form.user.value+"&password="+form.pwd.value+"&email="+form.email.value+"&address="+form.province.value+"-"+form.city.value+"&question="+form.question.value+"&answer="+form.answer.value;
+        var loader=new net.AjaxRequest("UserServlet?action=save&nocache="+new Date().getTime(),deal_save,onerror,"POST",params);
+        }
 }
 function deal_save()
 {
 	var msg=this.req.responseText;
-	alert(msg);
+	if(msg.indexOf("成功")>=0)
+		{
+		   alert(msg);
+		   window.location.href="Home.jsp";
+		}
+	else{
+		   alert(msg);
+		   window.location.href="Register.jsp";
+	}
 }
 </script>
 
 	
 </head>
-<body>
+<body onload="flag()">
 <div id="box"></div>
 <div class="cent-box register-box">
 	<div class="cent-box-header">
@@ -176,30 +223,29 @@ function deal_save()
                      
                      <!-- 检查输入 并给出错误信息-->
                      <tr id="tr_user" style="display:none">
-                         <td  id="div_user"  width=100%  height=10px style="border:#FF6600 1px solid; color:#FF0000;"></td>
+                         <td id="div_user"  width=100%  height=10px style="border:#FF6600 1px solid; color:#FF0000;"></td>
                      </tr>
                      
                      <tr>
-                           <td width="93" height="40" align="right">用户名：</td>
-                           <td height="40" align="left"><input style="width:200px" name="user" type="text" onBlur="checkUser(this.value)">
-                     </tr>
+                           <td width="93" height="40" align="right">*用户名：</td>
+                           <td height="40" align="left"><input style="width:200px" id="user" name="user" type="text" onBlur="checkUser(this.value)">
 			         <tr>
-                           <td height="40" align="right">密码：</td>
-                           <td height="40" align="left"><input style="width:200px" name="pwd" type="password" onBlur="checkPwd(this.value)">
+                           <td height="40" align="right">*密码：</td>
+                           <td height="40" align="left"><input style="width:200px" id="pwd" name="pwd" type="password" onBlur="checkPwd(this.value)">
                      </tr>
                      <tr>
-                           <td height="40" align="right">确认密码：</td>
-                           <td height="40" align="left"><input style="width:200px" name="repwd" type="password" onBlur="checkRepwd(this.value)">
+                           <td height="40" align="right">*确认密码：</td>
+                           <td height="40" align="left"><input style="width:200px" id="repwd" name="repwd" type="password" onBlur="checkRepwd(this.value)">
                      </tr>
                 <tr id="tr_email" style="display:none">
                   <td height="40" colspan="2" align="center"><div id="div_email" style="border:#FF6600 1px solid; color:#FF0000; width:90%; height:29px; padding-top:8px; background-image:url(images/div_bg.jpg)"></div></td>
                 </tr>
                 <tr>
-                  <td height="40" align="right">E-mail地址：</td>
-                  <td height="40" align="left"><input style="width:200px" name="email" type="text" size="35" onBlur="checkEmail(this.value)">
+                  <td height="40" align="right">*E-mail地址：</td>
+                  <td height="40" align="left"><input style="width:200px" id="email" name="email" type="text" size="35" onBlur="checkEmail(this.value)">
                 </tr>
                 <tr>
-                  <td height="40" align="right">所在地：</td>
+                  <td height="40" align="right">*所在地：</td>
                   <td height="40" align="left">
                   <select style="width:95px" name="province" id="province"  onfocus="getProvince()">
                   <option ></option>
@@ -212,7 +258,7 @@ function deal_save()
                   <td height="40" colspan="2" align="center"><div id="div_question" style="border:#FF6600 1px solid; color:#FF0000; width:90%; height:29px; padding-top:8px; background-image:url(images/div_bg.jpg)"></div></td>
                 </tr>
                 <tr>
-                  <td height="40" align="right" style="width:120px">密码提示问题：</td>
+                  <td height="40" align="right" style="width:120px">*密码提示问题：</td>
                   <td height="40" align="left"><select style="width:200px" name="question" id="question" onfocus="getQuestions()">
                   <!--  <input style="width:200px" name="question" type="text" id="question" size="35" onBlur="checkQuestion(this.value,this.form.answer.value)">  -->
                 </tr>
@@ -220,12 +266,13 @@ function deal_save()
                   <td height="40" colspan="2" align="center"><div id="div_answer" style="border:#FF6600 1px solid; color:#FF0000; width:90%; height:29px; padding-top:8px; background-image:url(images/div_bg.jpg)"></div></td>
                 </tr>
                 <tr>
-                  <td height="40" align="right">提示问题答案：</td>
+                  <td height="40" align="right">*提示问题答案：</td>
                   <td height="40" align="left"><input style="width:200px" name="answer" type="text" id="answer" size="35" onBlur="checkQuestion(this.value)"></td>
                 </tr>
 		 
                 </table>
                 <div style="text-align:center;"><input align="middle" type="button" value="注册" style="width:100px;"  onclick="save()"></input></div>
+                <div align="middle" id="checkinfo" width=100%  height=10px style="color:red;"></div>
 			<br>
 			</form>
 		</div>
@@ -233,8 +280,8 @@ function deal_save()
 </div>
 <br>
 <div class="footer">
-	<p>知乎 </p>
-	<p>Designed By George  @ 2017</p>
+	<p>Cicle </p>
+	<p>Designed By George  @ 2018</p>
 </div>
 
 <script src='JS/particles.js' type="text/javascript"></script>

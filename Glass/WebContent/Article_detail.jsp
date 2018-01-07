@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="CSS/default.css" media="screen"/>
-<title>知乎-文章</title>
+<title>Cicle-文章</title>
 
 <script language="javascript"  src="JS/AjaxRequest.js"></script>	
 <script language="javascript"  src="JS/glassFunctions.js"></script>	
@@ -195,7 +195,7 @@ function onerror()
 		<div class="header">
 		
 		<div class="title">
-			<h1>拉拉-发现更大的自己</h1>
+			<h1>Cicle-发现更大的自己</h1>
 		</div>
 
 		<div class="navigation">

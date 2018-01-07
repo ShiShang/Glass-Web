@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="WebContent/WEB-INF"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
@@ -13,5 +14,12 @@
 	<classpathentry kind="lib" path="C:/Users/shifawu/Desktop/git/Glass/Glass/WebContent/WEB-INF/lib/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/shifawu/Desktop/git/Glass/Glass/WebContent/WEB-INF/lib/org.json.jar"/>
 	<classpathentry kind="lib" path="C:/Users/shifawu/Desktop/git/Glass/Glass/WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/shifawu/Desktop/git/Glass/Glass/WebContent/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/shifawu/Desktop/git/Glass/Glass/WebContent/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.1.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://java.sun.com/jsp/jstl/core"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
