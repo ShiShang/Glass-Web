@@ -92,7 +92,7 @@
     <display-name>Question_listServlet</display-name>
     <servlet-name>Question_listServlet</servlet-name>
     <servlet-class>com.glass.Servlet.Question_listServlet</servlet-class>
-  </servlet>5
+  </servlet>
   <servlet-mapping>
     <servlet-name>Question_listServlet</servlet-name>
     <url-pattern>/Question_listServlet</url-pattern>
@@ -107,10 +107,40 @@
     <servlet-name>question</servlet-name>
     <url-pattern>/question</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Sidenav_listServlet</display-name>
+    <servlet-name>Sidenav_listServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.Sidenav_listServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sidenav_listServlet</servlet-name>
+    <url-pattern>/Sidenav_listServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>Keep_listServlet</display-name>
+    <servlet-name>Keep_listServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.Keep_listServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Keep_listServlet</servlet-name>
+    <url-pattern>/Keep_listServlet</url-pattern>
+  </servlet-mapping>
+     <servlet>
+    <description></description>
+    <display-name>Present_listServlet</display-name>
+    <servlet-name>Present_listServlet</servlet-name>
+    <servlet-class>com.glass.Servlet.Present_listServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Present_listServlet</servlet-name>
+    <url-pattern>/Present_listServlet</url-pattern>
+  </servlet-mapping>
   
   
   <!-- https配置 -->
-  <security-constraint> 
+  <!-- <security-constraint> 
        <web-resource-collection> 
               <web-resource-name>SSL</web-resource-name> 
               <url-pattern>/*</url-pattern> 
@@ -118,7 +148,7 @@
        <user-data-constraint> 
               <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
        </user-data-constraint> 
-  </security-constraint>
+  </security-constraint> -->
 
 
 </web-app>

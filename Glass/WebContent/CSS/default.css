@@ -72,10 +72,12 @@ h1,h2,h3 {
 /* structure */
 .container {
 	background: url(../Images/topleft.gif) no-repeat;
+	height: 100%;
+    flex: 1; 
 }
 
 .header {
-	height: 92px;
+	height: 92px; 
 }
 
 /* title */
@@ -113,8 +115,15 @@ h1,h2,h3 {
 	background: #FFF url(../Images/bgmain.gif) no-repeat;
 	clear: both;
 	padding: 12px 12px 0 52px;
+    height:100%
 }
 
+/* .test {
+	background: #FFF url(../Images/bgmain.gif) no-repeat;
+	clear: both;
+	padding: 12px 12px 0 52px;
+    height:300px
+} */
 /* main left */
 .sidenav {
 	float: left;
@@ -152,7 +161,8 @@ h1,h2,h3 {
 .content {
 	float: left;
 	margin-right: 4%;
-	width: 69%;
+	width: 65%;
+	height:1100px;
 }
 .content .descr {
 	color: #C60;
@@ -179,6 +189,7 @@ h1,h2,h3 {
 	background: #0094D6 url(../Images/bgfooter.gif) repeat-x;
 	font-size: 1.1em;
 	padding: 14px 4% 12px;
+	height: 50px;
 }
 .footer a {
 	color: #FFF;

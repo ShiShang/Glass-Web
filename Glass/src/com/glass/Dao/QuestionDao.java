@@ -224,7 +224,7 @@ public class QuestionDao {
 		{
 			result=rs.getInt("q_id")+"";
 		}else{
-			result="没有获取到问题列表！";
+			result="没有获取到问题！";
 		}
 		conn.close();
 		return result;	

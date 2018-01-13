@@ -35,7 +35,7 @@ public class ConnDB {
 		Connection conn = null;
 		try { // 连接数据库时可能发生异常因此需要捕捉该异常
 			Class.forName("com.mysql.jdbc.Driver"); // 装载数据库驱动
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/glass","root","1085"); // 建立与数据库URL中定义的数据库的连接
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/glass?useUnicode=true&characterEncoding=UTF8","root","1085"); // 建立与数据库URL中定义的数据库的连接
 		} catch (Exception ee) {
 			ee.printStackTrace(); // 输出异常信息
 		}

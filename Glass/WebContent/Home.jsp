@@ -71,14 +71,14 @@ function onerror()
 		   else {
 			   for(Article article:list) { %>
 			   
-			<h1><a href='Article_detail.jsp?action=getArticle&article_id=<%=article.getId() %>'> <%= article.getTitle() %>  </a></h1>
+			<h1 style="font-size:16px"><a href='Article_detail.jsp?action=getArticle&article_id=<%=article.getId() %>'> <%= article.getTitle() %>  </a></h1>
 			<p>作者 ：           <%=article.getAuthor() %>&nbsp&nbsp
 			        发表时间：     <%=article.getStart_time() %>&nbsp&nbsp
 			        赞（                 <%=article.getPoll() %>） &nbsp&nbsp
 			        踩 （                <%=article.getHate() %>）  
 			</p>
 			<%  if(article.getContents().length()>300){ %>
-			<p> <%=article.getContents().substring(1,150) %>...&nbsp&nbsp&nbsp&nbsp
+			<p style="font-size:14px"> <%=article.getContents().substring(1,150) %>...&nbsp&nbsp&nbsp&nbsp
 			<a href='Article_detail.jsp?action=getArticle&article_id=<%=article.getId() %>'> <br>    阅读更多</a></p>
 			 
 			<% }else{ %>
@@ -87,6 +87,7 @@ function onerror()
 		</div>
 
 		<div class="sidenav">
+		<c:import url="/Sidenav_listServlet"/>
 		    <div id="log">
             <h1>当前为登录状态</h1>
 			<div>
@@ -102,36 +103,44 @@ function onerror()
 				<input type="text" name="search" class="styled" /> <input type="submit" value="submit" class="button" />
 			</div>
 			</form>
-
-			<h1>最新发表</h1>
+		    <h1>最新发表-文章</h1>
+            <% ArrayList<Article> list_time=(ArrayList<Article>)request.getAttribute("list_time");
+               if(list_time==null||list_time.size()<1) { out.print("暂无数据..."); }
+ 		       else {
+ 			   for(Article article:list_time) { 
+ 				  String name;
+ 			      if (article.getTitle().length()>10)
+ 			      {
+ 			         name=article.getTitle().substring(0,9)+"...";
+ 			      }else{ name=article.getTitle();}%>
 			<ul>
-				<li><a href="index.html">pellentesque</a></li>
-				<li><a href="index.html">sociis natoque</a></li>
-				<li><a href="index.html">convallis</a></li>
+				<li><a href="Article_detail.jsp?action=getArticle&article_id=<%=article.getId()%>"> <%=name %></a></li>
 			</ul>
-
-			<h1>点赞最多</h1>
+	    	<%}} %>
+			<h1>点赞最多-文章</h1>
+            <% ArrayList<Article> list_poll=(ArrayList<Article>)request.getAttribute("list_poll");
+               if(list_poll==null||list_poll.size()<1) { out.print("暂无数据..."); }
+ 		       else {
+ 			   for(Article article:list_poll) { 
+ 				  String name;
+ 			      if (article.getTitle().length()>10)
+ 			      {
+ 			         name=article.getTitle().substring(0,9)+"...";
+ 			      }else{ name=article.getTitle();}%>
 			<ul>
-				<li><a href="index.html">consequat molestie</a></li>
-				<li><a href="index.html">sem justo</a></li>
-				<li><a href="index.html">semper</a></li>
+				<li><a href="Article_detail.jsp?action=getArticle&article_id=<%=article.getId()%>"> <%=name %></a></li>
 			</ul>
-
-			<h1>热门作者</h1>
-			<ul>
-				<li><a href="index.html">sociis natoque</a></li>
-				<li><a href="index.html">magna sed purus</a></li>
-				<li><a href="index.html">tincidunt</a></li>
-			</ul>
-
+			<%}} %>
 		</div>
+		
+		
 	    <br><br><br>
 		<div class="clearer">&nbsp;</div>
 	 	<% Pagination pagination=new Pagination(); 
 		   String currentPage=(String)request.getAttribute("currentPage");
 		   String listnum=(String)request.getAttribute("listnum");
 		   String strHtml="";
-		   if(listnum==null){strHtml="";}else{
+		   if(listnum==null || listnum.equals("没有获取到文章！")){strHtml="";}else{
 		   strHtml=pagination.printCtrl(currentPage,"Home.jsp?", listnum);}
 		%>
 		<p id="flag"><%= strHtml %></p>
@@ -143,9 +152,9 @@ function onerror()
 
 <div class="footer">
 
-	<div class="left">&copy; 2018 <a href="index.html">lala.com</a>. <a href="http://jigsaw.w3.org/css-validator/check/referer">Design By</a><a href="http://validator.w3.org/check?uri=referer">   @George</a>.</div>
+	<div class="left">copyright&copy; 2018 <a href="Home.jsp">cicle.top</a></div>
 	
-	<div class="right"><a href="http://www.cssmoban.com/">Love Anna</a> from George <a href="http://cssmoban.com/">www.baidu.com</a></div>
+	<div class="right"><a href="index.jsp">Love Anna</a> from George <a href="Home.jsp">www.cicle.top</a></div>
 	
 	<div class="clearer">&nbsp;</div>
 

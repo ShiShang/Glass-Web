@@ -1,5 +1,8 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page import="com.glass.Model.Article" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.glass.Tools.Pagination" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -11,14 +14,12 @@
 <script language="javascript"  src="JS/AjaxRequest.js"></script>	
 <script language="javascript"  src="JS/glassFunctions.js"></script>	
 <script language="javascript">
-
 function load()
 {
 	var question_id=GetQueryString("question_id");
 	var loader=new net.AjaxRequest("QuestionServlet?action=getQuestion&question_id="+question_id+"&nocache="+new Date().getTime(),onload,onerror,"GET","");
 	var loader1=new net.AjaxRequest("QuestionServlet?action=getAnswer&question_id="+question_id+"&nocache="+new Date().getTime(),deal_getAnswer,onerror,"GET","");
 }
-
 function onload()
 {
 	var result=this.req.responseText;
@@ -51,7 +52,6 @@ function onload()
 	    document.getElementById('nolog').style.display= "none";
     }
 }
-
 function deal_getAnswer()
 {
 	var result=eval("("+this.req.responseText+")");
@@ -93,7 +93,6 @@ function deal_getAnswer()
 			}
 	}
 }
-
 function poll()
 {
 	var question_id=GetQueryString("question_id");
@@ -165,7 +164,6 @@ function addFavorite()
 	var params="username="+username+"&type="+type+"&question_id="+question_id;
 	var loader=new net.AjaxRequest("PresentServlet?action=addFavorite&nocache="+new Date().getTime(), deal_addFavorite, onerror, "POST", params)
 }
-
 function deal_addFavorite()
 {
 	var result=this.req.responseText;
@@ -179,12 +177,10 @@ function deal_addFavorite()
 		alert(result);
 	}
 }	
-
 function onerror()
 {
     alert("出错啦！");
 }
-
 </script>
 </head>
 
@@ -237,9 +233,12 @@ function onerror()
         </form>
 	    </div>
 		<div class="sidenav">
+		<c:import url="/Sidenav_listServlet"/>
 		    <div id="log">
             <h1>当前为登录状态</h1>
+			<div>
 			<button type="登出" value="logout" class="button"  onclick="logout()">退出</button>
+			</div>
 			</div>
 			<div id="nolog">
 			<h1>未登录,你是游客。&nbsp</h1><button type="登录" value="login" class="button" onclick="window.location.href='login.jsp'">登录</button><button type="注册" value="logout" class="button" onclick="window.location.href='register.jsp'"> 注册</button>
@@ -250,28 +249,34 @@ function onerror()
 				<input type="text" name="search" class="styled" /> <input type="submit" value="submit" class="button" />
 			</div>
 			</form>
-
-			<h1>Something</h1>
+		    <h1>最新发表-文章</h1>
+            <% ArrayList<Article> list_time=(ArrayList<Article>)request.getAttribute("list_time");
+               if(list_time==null||list_time.size()<1) { out.print("暂无数据..."); }
+ 		       else {
+ 			   for(Article article:list_time) { 
+ 				  String name;
+ 			      if (article.getTitle().length()>10)
+ 			      {
+ 			         name=article.getTitle().substring(0,9)+"...";
+ 			      }else{ name=article.getTitle();}%>
 			<ul>
-				<li><a href="index.html">pellentesque</a></li>
-				<li><a href="index.html">sociis natoque</a></li>
-				<li><a href="index.html">convallis</a></li>
+				<li><a href="Article_detail.jsp?action=getArticle&article_id=<%=article.getId()%>"> <%=name %></a></li>
 			</ul>
-
-			<h1>Another thing</h1>
+	    	<%}} %>
+			<h1>点赞最多-文章</h1>
+            <% ArrayList<Article> list_poll=(ArrayList<Article>)request.getAttribute("list_poll");
+               if(list_poll==null||list_poll.size()<1) { out.print("暂无数据..."); }
+ 		       else {
+ 			   for(Article article:list_poll) { 
+ 				  String name;
+ 			      if (article.getTitle().length()>10)
+ 			      {
+ 			         name=article.getTitle().substring(0,9)+"...";
+ 			      }else{ name=article.getTitle();}%>
 			<ul>
-				<li><a href="index.html">consequat molestie</a></li>
-				<li><a href="index.html">sem justo</a></li>
-				<li><a href="index.html">semper</a></li>
+				<li><a href="Article_detail.jsp?action=getArticle&article_id=<%=article.getId()%>"> <%=name %></a></li>
 			</ul>
-
-			<h1>Third and last</h1>
-			<ul>
-				<li><a href="index.html">sociis natoque</a></li>
-				<li><a href="index.html">magna sed purus</a></li>
-				<li><a href="index.html">tincidunt</a></li>
-			</ul>
-
+			<%}} %>
 		</div>
 	
 		<div class="clearer">&nbsp;</div>
@@ -282,9 +287,9 @@ function onerror()
 
 <div class="footer">
 
-	<div class="left">&copy; 2018 <a href="index.html">lala.com</a>. <a href="http://jigsaw.w3.org/css-validator/check/referer">Design By</a><a href="http://validator.w3.org/check?uri=referer">   @George</a>.</div>
+	<div class="left">copyright&copy; 2018 <a href="Home.jsp">cicle.top</a></div>
 	
-	<div class="right"><a href="http://www.cssmoban.com/">Love Anna</a> from George <a href="http://cssmoban.com/">www.baidu.com</a></div>
+	<div class="right"><a href="index.jsp">Love Anna</a> from George <a href="Home.jsp">www.cicle.top</a></div>
 	
 	<div class="clearer">&nbsp;</div>
 

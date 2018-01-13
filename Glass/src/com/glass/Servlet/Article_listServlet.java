@@ -27,7 +27,8 @@ public class Article_listServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		
 		//处理文章列列表
 		String liststart=request.getParameter("liststart");
@@ -40,18 +41,13 @@ public class Article_listServlet extends HttpServlet {
 		int start=Integer.parseInt(liststart);
 		int end=Integer.parseInt(listend);
 		String currentPage=(start%end==0)?((start/end+1)+""):((start/end+2)+"");
-		String sql="select * from tb_article order by start_time DESC limit "+liststart+","+listend+";";
 		
+		//处理文章检索
+		String sql="select * from tb_article order by start_time DESC limit "+liststart+","+listend+";";
 	    //处理分页
 	    String sql1="select a_id from tb_article order by a_id DESC limit 1;";
+	    
 	    String result="";
-		try {
-			result=dao.get_listnum(sql1);
-			//System.out.println(result);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		
 		try{
 			result=dao.get_listnum(sql1);
 			if(list != null){

@@ -24,7 +24,7 @@ function checklength(str,length)
 function checkpwd(str)
 {
 	var password=str;
-	var Expression=/^([A-Za-z0-9]$/;
+	var Expression=/^([A-Za-z0-9])$/;
 	var objExp=new RegExp(Expression);
 	if(objExp.test(password)==true)
 		{
